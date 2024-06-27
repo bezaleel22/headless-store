@@ -7,7 +7,7 @@
     "dev:worker": "ts-node ./src/index-worker.ts",
     "dev": "concurrently npm:dev:*",
     "build": "tsc",
-    "generate": "node dist/generate.js",
+    "generate": "ts-node src/generate",
     "start:server": "npm run generate && node ./dist/index.js",
     "start:worker": "npm run generate && node ./dist/index-worker.js",
     "start": "concurrently npm:start:*"
