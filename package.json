@@ -6,10 +6,10 @@
     "dev:server": "ts-node ./src/index.ts",
     "dev:worker": "ts-node ./src/index-worker.ts",
     "dev": "concurrently bun:dev:*",
-    "build": "bun --bun src/generate.ts && tsc",
+    "build": "tsc",
     "generate": "bun --bun dist/generate.js",
-    "start:server": "bun --bun ./dist/index.js",
-    "start:worker": "bun --bun ./dist/index-worker.js",
+    "start:server": "bun run generate && bun --bun ./dist/index.js",
+    "start:worker": "bun run generate && bun --bun ./dist/index-worker.js",
     "start": "concurrently bun:start:*"
   },
   "dependencies": {
