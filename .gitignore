@@ -1,0 +1,13 @@
+node_modules
+dist
+admin-ui
+static/assets
+static/email/test-emails
+frp
+
+# Build
+build
+dist
+lib
+server
+functions/**/*.js
