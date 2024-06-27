@@ -7,9 +7,9 @@
     "dev:worker": "ts-node ./src/index-worker.ts",
     "dev": "concurrently npm:dev:*",
     "build": "tsc",
-    "generate": "npm --npm dist/generate.js",
-    "start:server": "npm run generate && npm --npm ./dist/index.js",
-    "start:worker": "npm run generate && npm --npm ./dist/index-worker.js",
+    "generate": "node dist/generate.js",
+    "start:server": "npm run generate && node ./dist/index.js",
+    "start:worker": "npm run generate && node ./dist/index-worker.js",
     "start": "concurrently npm:start:*"
   },
   "dependencies": {
