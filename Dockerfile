@@ -34,6 +34,7 @@ COPY package.json .
 
 COPY --chown=bun:bun --from=install /temp/prod/node_modules node_modules
 COPY --chown=bun:bun --from=prerelease /usr/src/app/dist ./dist
+COPY --chown=bun:bun --from=prerelease /usr/src/app/static ./static
 
 # run the app
 EXPOSE 3000/tcp
