@@ -8,8 +8,8 @@
     "dev": "concurrently npm:dev:*",
     "build": "tsc",
     "init": "node dist/index --init",
-    "start:server": "node ./dist/index --server",
-    "start:worker": "npm run init && node ./dist/index --worker",
+    "start:server": "npm run init && node ./dist/index --server",
+    "start:worker": "node ./dist/index --worker",
     "start": "concurrently npm:start:*"
   },
   "dependencies": {
