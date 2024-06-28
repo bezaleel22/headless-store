@@ -1,6 +1,6 @@
 FROM node:20-slim as base
-WORKDIR /usr/src/app
-
+WORKDIR /app
+USER node
 # install dependencies into temp directory
 # this will cache them and speed up future builds
 FROM base AS install
@@ -27,12 +27,10 @@ RUN npm run build
 FROM base AS release
 
 # Run the application as a non-root user.
-USER node
-COPY package.json .
-
+COPY --chown=node:node package.json .
 COPY --chown=node:node --from=install /temp/prod/node_modules node_modules
 COPY --chown=node:node --from=prerelease /usr/src/app/dist ./dist
-COPY --chown=node:node --from=prerelease /usr/src/app/static ./static
 
 # run the app
+USER node
 EXPOSE 3000/tcp
