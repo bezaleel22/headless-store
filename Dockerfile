@@ -1,4 +1,4 @@
-FROM node:20-slim as base
+FROM node:20-slim AS base
 WORKDIR /app
 
 # install dependencies into temp directory
@@ -29,7 +29,7 @@ FROM base AS release
 # Run the application as a non-root user.
 COPY package.json .
 COPY --from=install /temp/prod/node_modules node_modules
-COPY --from=prerelease /usr/src/app/dist ./dist
+COPY --from=prerelease /app/dist ./dist
 
 # run the app
 EXPOSE 3000/tcp
