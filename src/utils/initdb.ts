@@ -43,7 +43,6 @@ export const initializeDatabase = () => {
         () => process.exit(0),
         (err) => {
           revertLastMigration(config);
-          fs.rmSync(outputDir, { recursive: true });
           console.log(err);
           process.exit(1);
         }
