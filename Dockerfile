@@ -27,10 +27,9 @@ RUN npm run build
 FROM base AS release
 
 # Run the application as a non-root user.
-COPY --chown=node:node package.json .
-COPY --chown=node:node --from=install /temp/prod/node_modules node_modules
-COPY --chown=node:node --from=prerelease /usr/src/app/dist ./dist
+COPY package.json .
+COPY --from=install /temp/prod/node_modules node_modules
+COPY --from=prerelease /usr/src/app/dist ./dist
 
 # run the app
-USER node
 EXPOSE 3000/tcp
