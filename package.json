@@ -7,21 +7,21 @@
     "dev:worker": "ts-node ./src/index-worker.ts",
     "dev": "concurrently npm:dev:*",
     "build": "tsc",
-    "generate": "ts-node src/generate",
-    "start:server": "node ./dist/index.js",
-    "start:worker": "node ./dist/index-worker.js",
+    "init": "node dist/index --init",
+    "start:server": "node ./dist/index --worker",
+    "start:worker": "node ./dist/index --server",
     "start": "concurrently npm:start:*"
   },
   "dependencies": {
     "@vendure/admin-ui-plugin": "2.2.0",
     "@vendure/asset-server-plugin": "2.2.0",
     "@vendure/core": "2.2.0",
+    "@vendure/create": "^2.2.7",
     "@vendure/email-plugin": "2.2.0",
     "dotenv": "16.4.5",
     "pg": "8.11.5",
     "typescript": "5.3.3"
   },
-  
   "devDependencies": {
     "@vendure/cli": "2.2.0",
     "@vendure/ui-devkit": "^2.2.0",

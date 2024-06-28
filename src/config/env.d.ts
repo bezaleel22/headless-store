@@ -15,6 +15,7 @@ declare global {
             DB_USERNAME: string;
             DB_PASSWORD: string;
             DB_SCHEMA: string;
+            DB_SYNCHRONIZE: string;
         }
     }
 }

@@ -2,8 +2,11 @@ node_modules
 dist
 admin-ui
 static/assets
+static/.init
 static/email/test-emails
 frp
+.env
+migrations
 
 # Build
 build
