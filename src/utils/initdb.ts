@@ -5,11 +5,11 @@ import {
 } from "@vendure/core";
 import { populate } from "@vendure/core/cli";
 import { bootstrap, DefaultJobQueuePlugin } from "@vendure/core";
-import { config } from "$config/vendure-config";
+import { config } from "../config/vendure-config";
 import path from "path";
 import fs from "fs";
 
-const outputDir = path.join(__dirname, "../migrations");
+const outputDir = path.join(__dirname, "../../migrations");
 const initialData = require.resolve("@vendure/create/assets/initial-data.json");
 const productsCsvFile = require.resolve("@vendure/create/assets/products.csv");
 const importAssetsDir = path.join(productsCsvFile, "../images");
@@ -43,6 +43,7 @@ export const initializeDatabase = () => {
         () => process.exit(0),
         (err) => {
           revertLastMigration(config);
+          fs.rmdirSync(outputDir, { recursive: true });
           console.log(err);
           process.exit(1);
         }

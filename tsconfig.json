@@ -15,10 +15,11 @@
     "paths": {
       "$config/*": ["./config/*"],
       "~/*": ["./*"]
-    }
+    },
+    
   },
   "exclude": ["node_modules", "migrations", "src/plugins/**/ui/*", "admin-ui"],
   "ts-node": {
     "files": true
-  }
+  },
 }
