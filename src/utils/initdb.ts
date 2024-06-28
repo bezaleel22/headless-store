@@ -7,7 +7,6 @@ import { populate } from "@vendure/core/cli";
 import { bootstrap, DefaultJobQueuePlugin } from "@vendure/core";
 import { config } from "../config/vendure-config";
 import path from "path";
-import fs from "fs";
 
 const outputDir = path.join(__dirname, "../../migrations");
 const initialData = require.resolve("@vendure/create/assets/initial-data.json");
@@ -24,7 +23,7 @@ const populateConfig = {
 };
 
 export const initializeDatabase = () => {
-  if (config.dbConnectionOptions.synchronize && !fs.existsSync(outputDir)) {
+  if (config.dbConnectionOptions.synchronize) {
     generateMigration(config, {
       name: "init",
       outputDir,
