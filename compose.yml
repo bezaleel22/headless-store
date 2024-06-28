@@ -1,37 +1,46 @@
-services:
-  server:
-    image: 'ghcr.io/bezaleel22/headless-store:latest'
-    command:
-      - npm
-      - run
-      - 'start:server'
-    depends_on:
-      worker:
-        condition: service_started
+# services:
+#   server:
+#     image: 'ghcr.io/bezaleel22/headless-store:latest'
+#     command:
+#       - npm
+#       - run
+#       - 'start:server'
+#     depends_on:
+#       worker:
+#         condition: service_started
+#     environment:
+#       SUPERADMIN_PASSWORD: '${SUPERADMIN_PASSWORD}'
+#       SUPERADMIN_USERNAME: '${SUPERADMIN_USERNAME}'
+#       COOKIE_SECRET: '${COOKIE_SECRET}'
+#       APP_ENV: '${APP_ENV}'
+#       DB_HOST: '${DB_HOST}'
+#       DB_PORT: '${DB_PORT}'
+#       DB_NAME: '${DB_NAME}'
+#       DB_USERNAME: '${DB_USERNAME}'
+#       DB_PASSWORD: '${DB_PASSWORD}'
+#   worker:
+#     image: 'ghcr.io/bezaleel22/headless-store:latest'
+#     command:
+#       - npm
+#       - run
+#       - 'start:worker'
+#     environment:
+#       SUPERADMIN_PASSWORD: '${SUPERADMIN_PASSWORD}'
+#       SUPERADMIN_USERNAME: '${SUPERADMIN_USERNAME}'
+#       COOKIE_SECRET: '${COOKIE_SECRET}'
+#       APP_ENV: '${APP_ENV}'
+#       DB_HOST: '${DB_HOST}'
+#       DB_PORT: '${DB_PORT}'
+#       DB_NAME: '${DB_NAME}'
+#       DB_USERNAME: '${DB_USERNAME}'
+#       DB_PASSWORD: '${DB_PASSWORD}'
+#       DB_SYNCHRONIZE: '${DB_SYNCHRONIZE}'
+
+  database:
+    image: postgres:16-alpine
+    ports:
+      - 5432:5432
     environment:
-      SUPERADMIN_PASSWORD: '${SUPERADMIN_PASSWORD}'
-      SUPERADMIN_USERNAME: '${SUPERADMIN_USERNAME}'
-      COOKIE_SECRET: '${COOKIE_SECRET}'
-      APP_ENV: '${APP_ENV}'
-      DB_HOST: '${DB_HOST}'
-      DB_PORT: '${DB_PORT}'
-      DB_NAME: '${DB_NAME}'
-      DB_USERNAME: '${DB_USERNAME}'
-      DB_PASSWORD: '${DB_PASSWORD}'
-  worker:
-    image: 'ghcr.io/bezaleel22/headless-store:latest'
-    command:
-      - npm
-      - run
-      - 'start:worker'
-    environment:
-      SUPERADMIN_PASSWORD: '${SUPERADMIN_PASSWORD}'
-      SUPERADMIN_USERNAME: '${SUPERADMIN_USERNAME}'
-      COOKIE_SECRET: '${COOKIE_SECRET}'
-      APP_ENV: '${APP_ENV}'
-      DB_HOST: '${DB_HOST}'
-      DB_PORT: '${DB_PORT}'
-      DB_NAME: '${DB_NAME}'
-      DB_USERNAME: '${DB_USERNAME}'
-      DB_PASSWORD: '${DB_PASSWORD}'
-      DB_SYNCHRONIZE: '${DB_SYNCHRONIZE}'
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: vendure
