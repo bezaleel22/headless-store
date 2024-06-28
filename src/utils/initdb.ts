@@ -34,9 +34,6 @@ export const initializeDatabase = () => {
 
     populate(() => bootstrap(populateConfig), initialData, productsCsvFile)
       .then((app) => {
-        if (!fs.existsSync(outputDir))
-          fs.mkdirSync(outputDir, { recursive: true });
-
         return app.close();
       })
       .then(
