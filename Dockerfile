@@ -30,7 +30,7 @@ FROM base AS release
 COPY package.json .
 COPY --from=install /temp/prod/node_modules node_modules
 COPY --from=prerelease /app/dist ./dist
-COPY --from=prerelease /app/static ./dist/static
+COPY --from=prerelease /app/static ./static
 
 # run the app
 EXPOSE 3000/tcp

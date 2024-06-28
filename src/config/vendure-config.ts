@@ -73,7 +73,7 @@ export const config: VendureConfig = {
   plugins: [
     AssetServerPlugin.init({
       route: "assets",
-      assetUploadDir: path.join(__dirname, "../static/assets"),
+      assetUploadDir: path.join(__dirname, "../../static/assets"),
       // For local dev, the correct value for assetUrlPrefix should
       // be guessed correctly, but for production it will usually need
       // to be set manually to match your production url.
