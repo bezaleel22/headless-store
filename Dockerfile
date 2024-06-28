@@ -1,6 +1,6 @@
 FROM node:20-slim as base
 WORKDIR /app
-USER node
+
 # install dependencies into temp directory
 # this will cache them and speed up future builds
 FROM base AS install
