@@ -77,7 +77,7 @@ export const config: VendureConfig = {
       // For local dev, the correct value for assetUrlPrefix should
       // be guessed correctly, but for production it will usually need
       // to be set manually to match your production url.
-      assetUrlPrefix: IS_DEV ? undefined : "https://kutcheystore.com/assets/",
+      assetUrlPrefix: IS_DEV ? undefined : "https://store.beznet.org/assets/",
     }),
 
     DefaultJobQueuePlugin.init({ useDatabaseForBuffer: true }),
