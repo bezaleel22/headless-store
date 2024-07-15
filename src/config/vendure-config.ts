@@ -11,6 +11,9 @@ import { AdminUiPlugin } from "@vendure/admin-ui-plugin";
 import { compileUiExtensions, setBranding } from "@vendure/ui-devkit/compiler";
 import "dotenv/config";
 import path from "path";
+import { PaystackPlugin } from "../plugins/payment/paystack";
+import { AvatarPlugin } from "../plugins/avatar/avatar.plugin";
+import { WishlistPlugin } from "../plugins/wishlist/wishlist.plugin";
 
 const IS_DEV = process.env.APP_ENV === "dev";
 
@@ -21,17 +24,17 @@ export const config: VendureConfig = {
     shopApiPath: "shop-api",
     ...(IS_DEV
       ? {
-          adminApiPlayground: {
-            settings: { "request.credentials": "include" },
-          },
+        adminApiPlayground: {
+          settings: { "request.credentials": "include" },
+        },
 
-          adminApiDebug: true,
-          shopApiPlayground: {
-            settings: { "request.credentials": "include" },
-          },
+        adminApiDebug: true,
+        shopApiPlayground: {
+          settings: { "request.credentials": "include" },
+        },
 
-          shopApiDebug: true,
-        }
+        shopApiDebug: true,
+      }
       : {}),
   },
 
@@ -77,7 +80,7 @@ export const config: VendureConfig = {
       // For local dev, the correct value for assetUrlPrefix should
       // be guessed correctly, but for production it will usually need
       // to be set manually to match your production url.
-      assetUrlPrefix: IS_DEV ? undefined : "https://store.beznet.org/assets/",
+      assetUrlPrefix: IS_DEV ? undefined : `${process.env.DB_NAME}/assets/`,
     }),
 
     DefaultJobQueuePlugin.init({ useDatabaseForBuffer: true }),
@@ -91,11 +94,10 @@ export const config: VendureConfig = {
       globalTemplateVars: {
         // The following variables will change depending on your storefront implementation.
         // Here we are assuming a storefront running at http://localhost:8080.
-        fromAddress: '"example" <noreply@example.com>',
-        verifyEmailAddressUrl: "http://localhost:8080/verify",
-        passwordResetUrl: "http://localhost:8080/password-reset",
-        changeEmailAddressUrl:
-          "http://localhost:8080/verify-email-address-change",
+        fromAddress: '"Support" <noreply@beznet.org>',
+        verifyEmailAddressUrl: `${process.env.DB_NAME}:8080/verify`,
+        passwordResetUrl: `${process.env.DB_NAME}/password-reset`,
+        changeEmailAddressUrl: `${process.env.DB_NAME}/verify-email-address-change`,
       },
     }),
 
@@ -122,5 +124,8 @@ export const config: VendureConfig = {
       //     ],
       // }),
     }),
+    WishlistPlugin,
+    PaystackPlugin,
+    AvatarPlugin
   ],
 };

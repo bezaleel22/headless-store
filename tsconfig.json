@@ -12,10 +12,6 @@
     "skipLibCheck": true,
     "outDir": "./dist",
     "baseUrl": "./src",
-    "paths": {
-      "$config/*": ["./config/*"],
-      "~/*": ["./*"]
-    },
     
   },
   "exclude": ["node_modules", "migrations", "src/plugins/**/ui/*", "admin-ui"],
