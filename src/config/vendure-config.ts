@@ -12,8 +12,6 @@ import { AdminUiPlugin } from "@vendure/admin-ui-plugin";
 import { compileUiExtensions, setBranding } from "@vendure/ui-devkit/compiler";
 import "dotenv/config";
 import path from "path";
-import { PaystackPlugin } from "../plugins/payment/paystack";
-import { WishlistPlugin } from "../plugins/wishlist/wishlist.plugin";
 import { PromotionPlugin } from "../plugins/promotion/promotion.plugin";
 
 const IS_DEV = process.env.APP_ENV === "dev";
