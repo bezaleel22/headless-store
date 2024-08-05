@@ -125,7 +125,5 @@ export const config: VendureConfig = {
       // }),
     }),
     PromotionPlugin,
-    // PaystackPlugin,
-    // AvatarPlugin
   ],
 };
