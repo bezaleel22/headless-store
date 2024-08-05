@@ -15,9 +15,6 @@ services:
   server:
     image: 'ghcr.io/bezaleel22/headless-store:latest'
     command: [npm, run, start:server]
-    depends_on:
-      seeding:
-        condition: service_completed_successfully
     environment:
       SUPERADMIN_PASSWORD: '${SUPERADMIN_PASSWORD}'
       SUPERADMIN_USERNAME: '${SUPERADMIN_USERNAME}'
@@ -31,9 +28,6 @@ services:
   worker:
     image: 'ghcr.io/bezaleel22/headless-store:latest'
     command: [npm, run, start:worker]
-    depends_on:
-      seeding:
-        condition: service_completed_successfully
     environment:
       SUPERADMIN_PASSWORD: '${SUPERADMIN_PASSWORD}'
       SUPERADMIN_USERNAME: '${SUPERADMIN_USERNAME}'
