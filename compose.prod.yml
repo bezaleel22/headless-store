@@ -1,6 +1,7 @@
 services:
   seeding:
     image: 'ghcr.io/bezaleel22/headless-store:latest'
+    pull-policy: always
     command: [npm, run, init]
     environment:
       SUPERADMIN_PASSWORD: '${SUPERADMIN_PASSWORD}'
@@ -14,6 +15,7 @@ services:
       DB_PASSWORD: '${DB_PASSWORD}'
   server:
     image: 'ghcr.io/bezaleel22/headless-store:latest'
+    pull-policy: always
     command: [npm, run, start:server]
     environment:
       SUPERADMIN_PASSWORD: '${SUPERADMIN_PASSWORD}'
@@ -27,6 +29,7 @@ services:
       DB_PASSWORD: '${DB_PASSWORD}'
   worker:
     image: 'ghcr.io/bezaleel22/headless-store:latest'
+    pull-policy: always
     command: [npm, run, start:worker]
     environment:
       SUPERADMIN_PASSWORD: '${SUPERADMIN_PASSWORD}'
