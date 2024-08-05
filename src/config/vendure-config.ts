@@ -3,6 +3,7 @@ import {
   DefaultJobQueuePlugin,
   DefaultSearchPlugin,
   VendureConfig,
+  Asset,
 } from "@vendure/core";
 
 import { defaultEmailHandlers, EmailPlugin } from "@vendure/email-plugin";
@@ -12,8 +13,8 @@ import { compileUiExtensions, setBranding } from "@vendure/ui-devkit/compiler";
 import "dotenv/config";
 import path from "path";
 import { PaystackPlugin } from "../plugins/payment/paystack";
-import { AvatarPlugin } from "../plugins/avatar/avatar.plugin";
 import { WishlistPlugin } from "../plugins/wishlist/wishlist.plugin";
+import { PromotionPlugin } from "../plugins/promotion/promotion.plugin";
 
 const IS_DEV = process.env.APP_ENV === "dev";
 
@@ -39,6 +40,7 @@ export const config: VendureConfig = {
   },
 
   authOptions: {
+    // sessionDuration: "10",
     tokenMethod: ["bearer", "cookie"],
     superadminCredentials: {
       identifier: process.env.SUPERADMIN_USERNAME,
@@ -71,7 +73,15 @@ export const config: VendureConfig = {
 
   // When adding or altering custom field definitions, the database will
   // need to be updated. See the "Migrations" section in README.md.
-  customFields: {},
+  customFields: {
+    Customer: [
+      {
+        name: 'avatar',
+        type: 'relation',
+        entity: Asset,
+      },
+    ],
+  },
 
   plugins: [
     AssetServerPlugin.init({
@@ -124,8 +134,8 @@ export const config: VendureConfig = {
       //     ],
       // }),
     }),
-    WishlistPlugin,
-    PaystackPlugin,
-    AvatarPlugin
+    PromotionPlugin,
+    // PaystackPlugin,
+    // AvatarPlugin
   ],
 };
