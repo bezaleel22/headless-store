@@ -2,9 +2,6 @@ services:
   populate:
     image: 'ghcr.io/bezaleel22/headless-store:latest'
     command: [npm, run, init]
-    depends_on:
-      worker:
-        condition: service_started
     environment:
       SUPERADMIN_PASSWORD: '${SUPERADMIN_PASSWORD}'
       SUPERADMIN_USERNAME: '${SUPERADMIN_USERNAME}'
