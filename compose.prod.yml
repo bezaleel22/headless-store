@@ -1,10 +1,7 @@
 services:
   server:
     image: 'ghcr.io/bezaleel22/headless-store:latest'
-    command:
-      - npm
-      - run
-      - 'start:server'
+    command: [npm, run, init, '&&', npm, run, start:server]
     depends_on:
       worker:
         condition: service_started
