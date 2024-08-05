@@ -101,7 +101,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Computers'], containsAny: false } },
             ],
-            // parentName: 'Electronics',
+            parentName: 'Electronics',
             assetPaths: ['alexandru-acea-686569-unsplash.jpg'],
         },
         {
@@ -109,7 +109,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Photo'], containsAny: false } },
             ],
-            // parentName: 'Electronics',
+            parentName: 'Electronics',
             assetPaths: ['eniko-kis-663725-unsplash.jpg'],
         },
         {
@@ -127,7 +127,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Furniture'], containsAny: false } },
             ],
-            // parentName: 'Home & Garden',
+            parentName: 'Home & Garden',
             assetPaths: ['nathan-fertig-249917-unsplash.jpg'],
         },
         {
@@ -135,7 +135,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Plants'], containsAny: false } },
             ],
-            // parentName: 'Home & Garden',
+            parentName: 'Home & Garden',
             assetPaths: ['alex-rodriguez-santibanez-200278-unsplash.jpg'],
         },
         {
@@ -153,7 +153,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Equipment'], containsAny: false } },
             ],
-            // parentName: 'Sports & Outdoor',
+            parentName: 'Sports & Outdoor',
             assetPaths: ['neonbrand-428982-unsplash.jpg'],
         },
         {
@@ -161,7 +161,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Footwear'], containsAny: false } },
             ],
-            // parentName: 'Sports & Outdoor',
+            parentName: 'Sports & Outdoor',
             assetPaths: ['thomas-serer-420833-unsplash.jpg'],
         },
     ],
