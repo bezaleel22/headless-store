@@ -1,7 +1,6 @@
 services:
   seeding:
-    build:
-      context: .
+    image: 'ghcr.io/bezaleel22/headless-store:latest'
     command: [npm, run, init]
     environment:
       SUPERADMIN_PASSWORD: '${SUPERADMIN_PASSWORD}'
@@ -14,8 +13,7 @@ services:
       DB_USERNAME: '${DB_USERNAME}'
       DB_PASSWORD: '${DB_PASSWORD}'
   server:
-    build:
-      context: .
+    image: 'ghcr.io/bezaleel22/headless-store:latest'
     command: [npm, run, start:server]
     environment:
       SUPERADMIN_PASSWORD: '${SUPERADMIN_PASSWORD}'
@@ -28,8 +26,7 @@ services:
       DB_USERNAME: '${DB_USERNAME}'
       DB_PASSWORD: '${DB_PASSWORD}'
   worker:
-    build:
-      context: .
+    image: 'ghcr.io/bezaleel22/headless-store:latest'
     command: [npm, run, start:worker]
     environment:
       SUPERADMIN_PASSWORD: '${SUPERADMIN_PASSWORD}'
