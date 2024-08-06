@@ -2,17 +2,20 @@ import {
   generateMigration,
   runMigrations,
   revertLastMigration,
+  bootstrapWorker,
+  Logger,
 } from "@vendure/core";
-import { populate } from "@vendure/core/cli";
 import { bootstrap, DefaultJobQueuePlugin } from "@vendure/core";
 import { config } from "../config/vendure-config";
 import path from "path";
 import { initialData } from "./init-data";
+import { populate } from "./populate";
 
 const outputDir = path.join(__dirname, "../../migrations");
 // const initialData = require.resolve("@vendure/create/assets/initial-data.json");
 const productsCsvFile = require.resolve("@vendure/create/assets/products.csv");
 const importAssetsDir = path.join(productsCsvFile, "../images");
+const loggerCtx = 'Populate';
 
 const populateConfig = {
   ...config,
@@ -24,6 +27,8 @@ const populateConfig = {
 };
 
 export const initializeDatabase = () => {
+  Logger.info(`===============================`, loggerCtx);
+  
   if (config.dbConnectionOptions.synchronize) {
     generateMigration(config, {
       name: "init",
@@ -32,7 +37,7 @@ export const initializeDatabase = () => {
 
     runMigrations(config);
 
-    populate(() => bootstrap(populateConfig), initialData, productsCsvFile)
+    populate(() => bootstrapWorker(populateConfig), initialData, productsCsvFile)
       .then((app) => {
         return app.close();
       })
@@ -43,7 +48,8 @@ export const initializeDatabase = () => {
           console.log(err);
           process.exit(1);
         }
-      );
+    );
+    Logger.info(`===============================`, loggerCtx);
   } else {
     console.log("Database already initialized");
   }

@@ -1,5 +1,5 @@
 import { LanguageCode, Permission } from '@vendure/common/lib/generated-types';
-import { InitialData } from '@vendure/core';
+import { InitialData } from './populate';
 
 export const initialData: InitialData = {
     defaultLanguage: LanguageCode.en,
@@ -73,19 +73,62 @@ export const initialData: InitialData = {
         { name: 'Zero Tax', percentage: 0 },
     ],
     shippingMethods: [
-        { name: 'Standard Shipping', price: 500 },
-        { name: 'Express Shipping', price: 1000 },
+        { name: 'Uber Direct', price: 500 },
+        { name: 'GIG Logistics', price: 1000 },
     ],
     paymentMethods: [
         {
-            name: 'Standard Payment',
+            name: 'Paystack',
             handler: {
                 code: 'dummy-payment-handler',
-                arguments: [{ name: 'automaticSettle', value: 'false' }],
+                arguments: [{ name: 'automaticSettle', value: 'true' }],
             },
         },
     ],
+    facets: [
+        {
+            name: 'Others',
+            code: 'others',
+            values: [
+                {
+                    name: 'On Sale',
+                    code: 'on-sale',
+                },
+                {
+                    name: 'Featured',
+                    code: 'featured',
+                },
+                {
+                    name: 'New Products',
+                    code: 'new-products',
+                },
+                {
+                    name: 'Promotion',
+                    code: 'promotion',
+                },
+                {
+                    name: 'New Arrivals',
+                    code: 'new-arrivals',
+                },
+                {
+                    name: 'Trending',
+                    code: 'trending',
+                },
+                {
+                    name: 'Top Rated',
+                    code: 'top-rated',
+                },
+                {
+                    name: 'Best Sellers',
+                    code: 'best-sellers',
+                }
+            ]
+        }
+    ],
     collections: [
+        {
+            name: 'Others',
+        },
         {
             name: 'Electronics',
             filters: [
@@ -163,6 +206,62 @@ export const initialData: InitialData = {
             ],
             parentName: 'Sports & Outdoor',
             assetPaths: ['thomas-serer-420833-unsplash.jpg'],
+        },
+        {
+            name: 'On Sale',
+            filters: [
+                { code: 'facet-value-filter', args: { facetValueNames: ['On Sale'], containsAny: false } },
+            ],
+            parentName: 'Others',
+        },
+        {
+            name: 'Featured',
+            filters: [
+                { code: 'facet-value-filter', args: { facetValueNames: ['Featured'], containsAny: false } },
+            ],
+            parentName: 'Others',
+        },
+        {
+            name: 'New Products',
+            filters: [
+                { code: 'facet-value-filter', args: { facetValueNames: ['New Products'], containsAny: false } },
+            ],
+            parentName: 'Others',
+        },
+        {
+            name: 'New Arrivals',
+            filters: [
+                { code: 'facet-value-filter', args: { facetValueNames: ['New Arrivals'], containsAny: false } },
+            ],
+            parentName: 'Others',
+        },
+        {
+            name: 'Promotion',
+            filters: [
+                { code: 'facet-value-filter', args: { facetValueNames: ['Promotion'], containsAny: false } },
+            ],
+            parentName: 'Others',
+        },
+        {
+            name: 'Trending',
+            filters: [
+                { code: 'facet-value-filter', args: { facetValueNames: ['Trending'], containsAny: false } },
+            ],
+            parentName: 'Others',
+        },
+        {
+            name: 'Top Rated',
+            filters: [
+                { code: 'facet-value-filter', args: { facetValueNames: ['Top Rated'], containsAny: false } },
+            ],
+            parentName: 'Others',
+        },
+        {
+            name: 'Best Sellers',
+            filters: [
+                { code: 'facet-value-filter', args: { facetValueNames: ['Best Sellers'], containsAny: false } },
+            ],
+            parentName: 'Others',
         },
     ],
     countries: [
