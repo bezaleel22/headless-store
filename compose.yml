@@ -1,14 +1,11 @@
 services:
-  seeding:
-    build:
-      context: .
-    command: [npm, run, init]
-    env_file: "./.env"
-      
+
   server:
     build:
       context: .
     command: [npm, run, start:server]
+    ports:
+      - 3000:3000
     depends_on:
       - database
     env_file: "./.env"

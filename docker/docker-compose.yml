@@ -1,0 +1,36 @@
+services:
+  server:
+    build:
+      context: .
+    command: [npm, run, start:server]
+    environment:
+      APP_ENV: dev
+      COOKIE_SECRET: vfkqcq8ml5
+      SUPERADMIN_USERNAME: superadmin
+      SUPERADMIN_PASSWORD: superadmin
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_NAME: vendure
+      DB_USERNAME: postgres
+      DB_PASSWORD: password
+      DB_SCHEMA: public
+      DB_SYNCHRONIZE: true
+    ports:
+      - 3000:3000
+
+  worker:
+    build:
+      context: .
+    command: [npm, run, start:worker]
+    environment:
+      APP_ENV: dev
+      COOKIE_SECRET: vfkqcq8ml5
+      SUPERADMIN_USERNAME: superadmin
+      SUPERADMIN_PASSWORD: superadmin
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_NAME: vendure
+      DB_USERNAME: postgres
+      DB_PASSWORD: password
+      DB_SCHEMA: public
+      DB_SYNCHRONIZE: true

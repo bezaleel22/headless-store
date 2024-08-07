@@ -26,3 +26,10 @@ services:
       DB_USERNAME: '${DB_USERNAME}'
       DB_PASSWORD: '${DB_PASSWORD}'
       DB_SYNCHRONIZE: '${DB_SYNCHRONIZE}'
+
+  database:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD}'
+      POSTGRES_DB: '${DB_NAME}'
