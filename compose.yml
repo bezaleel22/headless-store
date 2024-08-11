@@ -1,23 +1,4 @@
 services:
-
-  server:
-    build:
-      context: .
-    command: [npm, run, start:server]
-    ports:
-      - 3000:3000
-    depends_on:
-      - database
-    env_file: "./.env"
-
-  worker:
-    build:
-      context: .
-    command: [npm, run, start:worker]
-    depends_on:
-      - database
-    env_file: "./.env"
-
   database:
     image: postgres:16-alpine
     ports:
@@ -26,3 +7,42 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: vendure
+      
+  server:
+    build:
+      context: .
+    command: [npm, run, start:server]
+    ports:
+      - 3000:3000
+    depends_on:
+      - database
+      - worker
+    environment:
+      SUPERADMIN_PASSWORD: superadmin
+      SUPERADMIN_USERNAME: superadmin
+      COOKIE_SECRET: vfkqcq8ml5
+      APP_ENV: prod
+      DB_HOST: database
+      DB_PORT: 5432
+      DB_NAME: vendure
+      DB_USERNAME: postgres
+      DB_PASSWORD: password
+      DB_SYNCHRONIZE: true
+
+  worker:
+    build:
+      context: .
+    command: [npm, run, start:worker]
+    depends_on:
+      - database
+    environment:
+      SUPERADMIN_PASSWORD: superadmin
+      SUPERADMIN_USERNAME: superadmin
+      COOKIE_SECRET: vfkqcq8ml5
+      APP_ENV: dev
+      DB_HOST: database
+      DB_PORT: 5432
+      DB_NAME: vendure
+      DB_USERNAME: postgres
+      DB_PASSWORD: password
+      DB_SYNCHRONIZE: true
