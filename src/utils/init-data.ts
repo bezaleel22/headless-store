@@ -1,5 +1,5 @@
 import { LanguageCode, Permission } from '@vendure/common/lib/generated-types';
-import { InitialData } from './populate';
+import { InitialData } from './types';
 
 export const initialData: InitialData = {
     defaultLanguage: LanguageCode.en,
@@ -87,7 +87,7 @@ export const initialData: InitialData = {
     ],
     facets: [
         {
-            name: 'Others',
+            name: 'others',
             code: 'others',
             values: [
                 {

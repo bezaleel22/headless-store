@@ -1,40 +1,12 @@
 import { INestApplicationContext } from '@nestjs/common';
-import { ConfigurableOperationInput } from '@vendure/common/lib/generated-types';
-import { Channel, ChannelService, CollectionDefinition, CountryDefinition, FacetService, ImportProgress, Importer, LanguageCode, Logger, Populator, RequestContextService, RoleDefinition, TransactionalConnection, User, VendureWorker } from '@vendure/core';
-import { config } from '../config/vendure-config';
+import { Channel, ChannelService, FacetService, FacetValueService, ImportProgress, Importer, LanguageCode, Logger, Populator, RequestContextService, SearchService, TransactionalConnection, User, VendureWorker } from '@vendure/core';
 import fs from 'fs-extra';
 import path from 'path';
 import { lastValueFrom } from 'rxjs';
+import { config } from '../config/vendure-config';
+import { InitialData } from './types';
 
 const loggerCtx = 'Populate';
-
-export interface InitialData {
-    defaultLanguage: LanguageCode;
-    defaultZone: string;
-    roles?: RoleDefinition[];
-    countries: CountryDefinition[];
-    taxRates: Array<{
-        name: string;
-        percentage: number;
-    }>;
-    shippingMethods: Array<{
-        name: string;
-        price: number;
-    }>;
-    paymentMethods: Array<{
-        name: string;
-        handler: ConfigurableOperationInput;
-    }>;
-    collections: CollectionDefinition[];
-    facets: {
-        name: string;
-        code: string;
-        values: {
-            name: string;
-            code: string;
-        }[];
-    }[]
-}
 
 export async function populate(
     bootstrapFn: () => Promise<VendureWorker>,
@@ -84,15 +56,16 @@ export async function populate(
 
         Logger.info(`Imported ${importResult.imported} products`, loggerCtx);
 
-        await populateCollections(app, initialData, channel);
         await populateFacet(app, initialData, channel);
+        await populateCollections(app, initialData, channel);
+
     }
 
     Logger.info('Done!', loggerCtx);
     return app;
 }
 
-export async function populateInitialData(
+async function populateInitialData(
     app: INestApplicationContext,
     initialData: InitialData,
     channel?: Channel,
@@ -107,7 +80,7 @@ export async function populateInitialData(
     }
 }
 
-export async function populateCollections(
+async function populateCollections(
     app: INestApplicationContext,
     initialData: InitialData,
     channel?: Channel,
@@ -124,7 +97,7 @@ export async function populateCollections(
     }
 }
 
-export async function importProductsFromCsv(
+async function importProductsFromCsv(
     app: INestApplicationContext,
     productsCsvPath: string,
     languageCode: LanguageCode,
@@ -142,51 +115,54 @@ export async function importProductsFromCsv(
     return lastValueFrom(importer.parseAndImport(productData, ctx, true));
 }
 
-export async function populateFacet(
+async function populateFacet(
     app: INestApplicationContext,
     initialData: InitialData,
     channel?: Channel,
 ) {
-    const superAdminUser = await app.get(TransactionalConnection).rawConnection.getRepository(User).findOne({
-        where: {
-            identifier: config.authOptions.superadminCredentials?.identifier,
-        },
-    });
 
     const ctx = await app.get(RequestContextService).create({
-        user: superAdminUser ?? undefined,
         apiType: 'admin',
         languageCode: initialData.defaultLanguage,
-        channelOrToken: channel ?? (await app.get(ChannelService).getDefaultChannel()),
     });
 
     try {
-        const facet = app.get(FacetService);
-        initialData.facets.forEach((f) => {
-            const values = f.values.map((v) => {
-                return {
-                    code: v.code,
-                    translations: [
-                        {
-                            languageCode: LanguageCode.en,
-                            name: v.name,
-                        },
-                    ],
-                }
-            })
+        const facetService = app.get(FacetService);
+        const facetValueService = app.get(FacetValueService);
+        for (const facetDef of initialData.facets) {
             const facetData = {
-                code: f.code,
+                code: facetDef.code,
                 translations: [
                     {
                         languageCode: LanguageCode.en,
-                        name: f.name,
+                        name: facetDef.name,
                     },
                 ],
                 isPrivate: false,
-                values: values,
             }
-            facet.create(ctx, facetData);
-        });
+
+            const facet = await facetService.create(ctx, facetData);
+            if (facetDef.values && facetDef.values.length) {
+                for (const value of facetDef.values) {
+                    await facetValueService.create(ctx, facet, {
+                        facetId: facet.id,
+                        code: value.code,
+                        translations: [
+                            {
+                                languageCode: LanguageCode.en,
+                                name: value.name,
+                            },
+                        ],
+                    })
+
+                }
+            }
+
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 50));
+        await app.get(SearchService).reindex(ctx);
+
         Logger.info(`Created ${initialData.facets.length} Facets`, loggerCtx);
     } catch (err: any) {
         Logger.info(err.message, loggerCtx);

@@ -12,7 +12,6 @@ import { initialData } from "./init-data";
 import { populate } from "./populate";
 
 const outputDir = path.join(__dirname, "../../migrations");
-// const initialData = require.resolve("@vendure/create/assets/initial-data.json");
 const productsCsvFile = require.resolve("@vendure/create/assets/products.csv");
 const importAssetsDir = path.join(productsCsvFile, "../images");
 const loggerCtx = 'Populate';
