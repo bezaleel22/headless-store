@@ -16,7 +16,7 @@ declare global {
           DB_PASSWORD: string;
           DB_SCHEMA: string;
           DB_SYNCHRONIZE: string;
-          BASE_URL: string;
+          ASSET_BASE_URL: string;
         }
     }
 }
