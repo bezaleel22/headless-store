@@ -90,44 +90,57 @@ export const initialData: InitialData = {
             name: 'others',
             code: 'others',
             values: [
-                {
-                    name: 'On Sale',
-                    code: 'on-sale',
-                },
-                {
-                    name: 'Featured',
-                    code: 'featured',
-                },
-                {
-                    name: 'New Products',
-                    code: 'new-products',
-                },
-                {
-                    name: 'Promotion',
-                    code: 'promotion',
-                },
-                {
-                    name: 'New Arrivals',
-                    code: 'new-arrivals',
-                },
-                {
-                    name: 'Trending',
-                    code: 'trending',
-                },
-                {
-                    name: 'Top Rated',
-                    code: 'top-rated',
-                },
-                {
-                    name: 'Best Sellers',
-                    code: 'best-sellers',
-                }
+                { name: 'On Sale', code: 'on-sale' },
+                { name: 'Featured', code: 'featured' },
+                { name: 'New Products', code: 'new-products' },
+                { name: 'New Arrivals', code: 'new-arrivals' },
+                { name: 'Trending', code: 'trending' },
+                { name: 'Top Rated', code: 'top-rated' },
+                { name: 'Best Sellers', code: 'best-sellers' },
+                { name: 'Top Deals', code: 'top-deals' },
+            ],
+        },
+        {
+            name: 'discounts',
+            code: 'discounts',
+            values: [
+                { name: '10% Off', code: '10' },
+                { name: '20% Off', code: '20' },
+                { name: '30% Off', code: '30' },
+                { name: '40% Off', code: '40' },
+                { name: '50% Off', code: '50' }
+            ]
+        },
+        {
+            name: 'offers',
+            code: 'MMM dd, yyyy hh:mm tt',
+            values: [
+                { name: 'flash-sale', code: 'Aug 20, 2024 12:00 PM' }
             ]
         }
     ],
     collections: [
         {
             name: 'Others',
+            filters: [
+                {
+                    code: 'facet-value-filter',
+                    args: {
+                        facetValueNames: [
+                            'On Sale',
+                            'Featured',
+                            'New Products',
+                            'New Arrivals',
+                            'Trending',
+                            'Top Rated',
+                            'Best Sellers',
+                            'Top Deals'
+                        ],
+                        containsAny: false
+                    },
+                },
+            ],
+            inheritFilters: false,
         },
         {
             name: 'Electronics',
@@ -144,6 +157,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Computers'], containsAny: false } },
             ],
+            inheritFilters: false,
             parentName: 'Electronics',
             assetPaths: ['alexandru-acea-686569-unsplash.jpg'],
         },
@@ -152,6 +166,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Photo'], containsAny: false } },
             ],
+            inheritFilters: false,
             parentName: 'Electronics',
             assetPaths: ['eniko-kis-663725-unsplash.jpg'],
         },
@@ -170,6 +185,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Furniture'], containsAny: false } },
             ],
+            inheritFilters: false,
             parentName: 'Home & Garden',
             assetPaths: ['nathan-fertig-249917-unsplash.jpg'],
         },
@@ -178,6 +194,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Plants'], containsAny: false } },
             ],
+            inheritFilters: false,
             parentName: 'Home & Garden',
             assetPaths: ['alex-rodriguez-santibanez-200278-unsplash.jpg'],
         },
@@ -196,6 +213,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Equipment'], containsAny: false } },
             ],
+            inheritFilters: false,
             parentName: 'Sports & Outdoor',
             assetPaths: ['neonbrand-428982-unsplash.jpg'],
         },
@@ -204,6 +222,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Footwear'], containsAny: false } },
             ],
+            inheritFilters: false,
             parentName: 'Sports & Outdoor',
             assetPaths: ['thomas-serer-420833-unsplash.jpg'],
         },
@@ -212,6 +231,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['On Sale'], containsAny: false } },
             ],
+            inheritFilters: false,
             parentName: 'Others',
         },
         {
@@ -219,6 +239,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Featured'], containsAny: false } },
             ],
+            inheritFilters: false,
             parentName: 'Others',
         },
         {
@@ -226,6 +247,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['New Products'], containsAny: false } },
             ],
+            inheritFilters: false,
             parentName: 'Others',
         },
         {
@@ -233,13 +255,15 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['New Arrivals'], containsAny: false } },
             ],
+            inheritFilters: false,
             parentName: 'Others',
         },
         {
-            name: 'Promotion',
+            name: 'Top Deals',
             filters: [
-                { code: 'facet-value-filter', args: { facetValueNames: ['Promotion'], containsAny: false } },
+                { code: 'facet-value-filter', args: { facetValueNames: ['Top Deals'], containsAny: false } },
             ],
+            inheritFilters: false,
             parentName: 'Others',
         },
         {
@@ -247,6 +271,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Trending'], containsAny: false } },
             ],
+            inheritFilters: false,
             parentName: 'Others',
         },
         {
@@ -254,6 +279,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Top Rated'], containsAny: false } },
             ],
+            inheritFilters: false,
             parentName: 'Others',
         },
         {
@@ -261,6 +287,7 @@ export const initialData: InitialData = {
             filters: [
                 { code: 'facet-value-filter', args: { facetValueNames: ['Best Sellers'], containsAny: false } },
             ],
+            inheritFilters: false,
             parentName: 'Others',
         },
     ],

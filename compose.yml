@@ -21,7 +21,7 @@ services:
       SUPERADMIN_PASSWORD: superadmin
       SUPERADMIN_USERNAME: superadmin
       COOKIE_SECRET: vfkqcq8ml5
-      APP_ENV: prod
+      APP_ENV: dev
       DB_HOST: database
       DB_PORT: 5432
       DB_NAME: vendure

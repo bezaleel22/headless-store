@@ -1,9 +1,8 @@
 import { INestApplicationContext } from '@nestjs/common';
-import { Channel, ChannelService, FacetService, FacetValueService, ImportProgress, Importer, LanguageCode, Logger, Populator, RequestContextService, SearchService, TransactionalConnection, User, VendureWorker } from '@vendure/core';
+import { Channel, ChannelService, FacetService, FacetValueService, ImportProgress, Importer, LanguageCode, Logger, Populator, RequestContextService, SearchService, VendureWorker } from '@vendure/core';
 import fs from 'fs-extra';
 import path from 'path';
 import { lastValueFrom } from 'rxjs';
-import { config } from '../config/vendure-config';
 import { InitialData } from './types';
 
 const loggerCtx = 'Populate';
